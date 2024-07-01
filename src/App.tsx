@@ -14,12 +14,12 @@ function App() {
       </GridItem>
       <Show above="lg">
       {/* ASIDE */}
-      <GridItem area={"aside"} bg={"blue"}>
+      <GridItem area={"aside"}>
         Aside
       </GridItem>
       </Show>
       {/* MAIN CONTENT */}
-      <GridItem area={"main"} bg={"dodgerblue"}>
+      <GridItem area={"main"}>
       MAIN
       </GridItem>
     </Grid>
