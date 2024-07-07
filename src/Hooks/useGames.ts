@@ -4,9 +4,10 @@ import apiClient from "../api-client";
 import { CanceledError } from "axios";
 
 // TO DEFINE THE SHAPE OF THE GAME OBJECT
-interface Game {
+export interface Game {
   id: number;
   title: string;
+  thumbnail: string;
 }
 
 const useGames = () => {
