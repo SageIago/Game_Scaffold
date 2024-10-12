@@ -2,11 +2,16 @@
 import { useState, useEffect } from "react";
 import apiClient from "../Services/api-client";
 import { CanceledError } from "axios";
-import { FetchGameResponse, Game } from "../Types";
 
-const useGames = () => {
-  // THIS IS FOR THE GAMES ARRAY
-  const [games, setGames] = useState<Game[]>([]);
+// TO DEFINE THE SHAPE OF THE GAME OBJECT
+export interface Genre {
+  id: number;
+  title: string;
+}
+
+const useGenres = () => {
+  // THIS IS FOR THE GENRES ARRAY
+  const [genres, setGenres] = useState<Genre[]>([]);
 
   // THIS IS FOR THE ERROR ARRAY
   const [error, setError] = useState();
@@ -20,10 +25,10 @@ const useGames = () => {
 
     setLoading(true);
     apiClient
-      .get<FetchGameResponse>("/games", { signal: CONTROLLER.signal })
+      .get<Genre[]>("/genres", { signal: CONTROLLER.signal })
       .then((response) => {
-        setGames(response.data.results);
-        setLoading(false);
+        setGenres(response.data);
+        setLoading(false)
       })
       .catch((err) => {
         if (err instanceof CanceledError) return; // THIS SEMI-COLON IS VERY IMPORTANT.....
@@ -35,7 +40,7 @@ const useGames = () => {
     return () => CONTROLLER.abort();
   }, []);
 
-  return { games, error, isLoading };
+  return { genres, error, isLoading};
 };
 
-export default useGames;
+export default useGenres
